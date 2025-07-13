@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+.container {
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 20px;
+  width: 100%;
+
+}
+
+.card {
+  background-color: rgb(236, 232, 232);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 5px;
+  margin: 20px;
+  width: 300px;
+}
+.projects{
+  position: relative;
+  display: flex;
+  width: 100%;
+ flex-wrap: wrap;
+ margin: 80px;
+  /* overflow: hidden; */
+}
+
+.card img {
+  width: 100%;
+}
+
+.header {
+  /* background-color: red; */
+  justify-content: center;
+  display: flex;
+  height: 50px;
+  margin-bottom: 20px;
+  /* width: 100px; */
+}
+
+.header p {
+  font-size: 80px;
+  font-style: normal;
+}
+
+.profile {
+  margin: 100px;
+  display: flex;
+}
+
+.summary {
+  width: 60%;
+}
+
+.summary p {
+  font-size: 30px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.profileSummary {
+  width: 40%;
+}
+.typing {
+  border-right: 2px solid black;
+  display: inline-block;
+  animation: blink 0.7s infinite;
+  padding-right: 4px;
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(70, 165, 127);
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    border-color: black;
+  }
+
+  50% {
+    border-color: transparent;
+  }
+}
+.navbar{
+  /* background-color: rgb(94, 163, 140); */
+  display: flex;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 5px;
+  margin: 5px;
+  justify-content: space-around;
+}
+
+.footer{
+  /* background-color: rgb(94, 163, 140); */
+  display: flex;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 5px;
+  margin: 5px;
+  margin-bottom: 20px;
+  justify-content: space-around;
+}
