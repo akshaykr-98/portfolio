@@ -1,8 +1,7 @@
 const mysql = require('mysql2')
 
-// function dbconnectionn(){
   const connection = mysql.createConnection({
-    host: '127.0.0.1',     // host for connection
+    host: 'localhost',     // host for connection(127.0.0.1)
     port: 3306,            // default port for mysql is 3306
     database: 'master',      // database from which we want to connect our node application
     user: 'root',          // username of the mysql connection
@@ -11,11 +10,20 @@ const mysql = require('mysql2')
 
 connection.connect(function (err){
     if(err){
-        console.log("error while connecting to database",JSON.stringify(err), JSON.stringify(err.message));
+        console.log("error while connecting to database", JSON.stringify(err.message));
         return;
         
     }
     console.log("Successfully connected to the mysql database");
 })
-// }
-module.exports=connection
+
+function executeQuery(query, values) {
+    return new Promise((resolve, reject) => {
+        connection.query(query, values, (err, results) => {
+            if (err) return reject(err);
+            resolve(results);
+        });
+    });
+}
+
+module.exports = executeQuery
