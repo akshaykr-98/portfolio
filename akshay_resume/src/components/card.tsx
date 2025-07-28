@@ -1,15 +1,24 @@
-// import Image from 'next/image'
-// import reactImg from '../../Asstes/images/React-icon.png'
+interface CardProps {
+  id: number;
+  title: string;
+  description: string;
+  thumbnail: string;
+}
 
-export default function Card(data){  
+export default function Card(data: CardProps) {  
   return(
-     <div className='card' key={data.id}>
+     <div className='card'>
       <div className="card-inner">
         <div className="card-front">
-          <img src={data.thumbnail} alt="React"/>
-          {/* <Image src={reactImg} alt="React" height='10' width='100' /> */}
+          <img 
+            src={data.thumbnail} 
+            alt={`${data.title} thumbnail`}
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.src = '/placeholder-image.jpg';
+            }}
+          />
          <h3><b>{data.title}</b></h3>
-
         </div>
         <div className="card-back">
           <h3><b>{data.title}</b></h3>
@@ -18,4 +27,4 @@ export default function Card(data){
       </div>
       </div>
   )
-} 
+}

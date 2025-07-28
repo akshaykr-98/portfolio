@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Card from '../components/card'
 import { getSkills } from '../services/common';
+import { useRouter } from 'next/navigation';
 
 export default function Profile() {
   const [text, setText] = useState('');
@@ -11,11 +12,12 @@ export default function Profile() {
   const [speed, setSpeed] = useState(150);
   const [projects, setProjects] = useState<any[]>([]);
   const [skills, setSkills] = useState<string[]>([]);
-
+  const router = useRouter();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await getSkills('', '');
+        const token = sessionStorage.getItem('authToken') || '';
+        const result = await getSkills('', token);
         if (result.status === 200) {
           const apiSkills = result.data.map((skill: any) => skill.name as string);
           const uniqueSkills = [...new Set(apiSkills)] as string[];
