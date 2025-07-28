@@ -142,7 +142,7 @@
   }
 }
 .navbar{
-  /* background-color: rgb(94, 163, 140); */
+  background-color: white;
   display: flex;
   flex-wrap: wrap;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -152,7 +152,7 @@
   justify-content: space-around;
   position: sticky;
   top: 0;
-  
+  z-index: 1000;
 }
 
 .footer{
