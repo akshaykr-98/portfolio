@@ -13,7 +13,7 @@ export default function App() {
     if (!token) {
       router.push('/login');
     }
-  }, []);
+  });
 
   return (
     <section>
