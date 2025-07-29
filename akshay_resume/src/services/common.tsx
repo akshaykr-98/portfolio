@@ -1,5 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080';
-import bcrypt from "bcryptjs";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://main.d1ho58lyaz1oo6.amplifyapp.com/';
 
 interface ApiResponse {
     status: number;
