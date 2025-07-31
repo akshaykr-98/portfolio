@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import user from '../../Asstes/images/icons8-test-account-48.png'
 import { useRouter } from 'next/navigation';
+import Cart from './cart';
 
 export default function Navbar() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)

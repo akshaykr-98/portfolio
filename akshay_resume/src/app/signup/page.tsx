@@ -3,6 +3,8 @@
 // React hooks for state management and Next.js Link component
 import { useState } from 'react';
 import Link from 'next/link';
+import { SignUp } from '@/services/common';
+import { useRouter } from 'next/navigation';
 
 /**
  * Signup Page Component
@@ -10,18 +12,19 @@ import Link from 'next/link';
  */
 export default function Signup() {
   // State variables for form inputs and loading status
+  const [name, setName] = useState(''); // User's name input
   const [email, setEmail] = useState(''); // User's email input
   const [password, setPassword] = useState(''); // User's password input
   const [confirmPassword, setConfirmPassword] = useState(''); // Password confirmation
   const [loading, setLoading] = useState(false); // Loading state for form submission
-
+  const router = useRouter();
   /**
    * Handles signup form submission with validation
    * @param e - Form event object
    */
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault(); // Prevent default form submission
-    
+
     // Validate password confirmation
     if (password !== confirmPassword) {
       alert('Passwords do not match');
@@ -31,12 +34,17 @@ export default function Signup() {
     setLoading(true); // Show loading state
     try {
       // TODO: Replace with actual API call to registration service
-      console.log('Signup:', { email, password });
+      const signup = await SignUp(name, email, password)
+      console.log("====SIGNUP result ===", signup);
+      if (signup.status == 200) {
+        router.push('/login'); // navigate to dashboard
+      }
       // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // await new Promise(resolve => setTimeout(resolve, 1000));
     } catch (error) {
       // Handle signup errors (network issues, email already exists, etc.)
       console.error('Signup failed:', error);
+      alert("Something Went Wrong, Please try again!")
     } finally {
       // Reset loading state regardless of success or failure
       setLoading(false);
@@ -62,7 +70,7 @@ export default function Signup() {
           Be seen everywhere.
         </h1>
       </div>
-      
+
       {/* Signup card with form elements */}
       <div className="auth-card">
         {/* Header section with title */}
@@ -73,6 +81,18 @@ export default function Signup() {
 
         {/* Signup form with email, password, and confirmation fields */}
         <form onSubmit={handleSignup} className="auth-form">
+          {/* Name input field */}
+          <div className="form-group">
+            <label>🏷️ Name</label>
+            <input
+              type="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)} // Update name state
+              placeholder="Enter your Name"
+              required // HTML5 validation
+            />
+          </div>
+
           {/* Email input field */}
           <div className="form-group">
             <label>📧 Email</label>

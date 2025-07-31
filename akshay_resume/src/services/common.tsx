@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://main.d1ho58lyaz1oo6.amplifyapp.com/';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://main.d1ho58lyaz1oo6.amplifyapp.com';
 
 interface ApiResponse {
     status: number;
@@ -119,7 +119,78 @@ export const UserLogin = async (email: string, password?: string): Promise<ApiRe
             } else {
                 return {
                     status: data.status || 400,
-                    status_message: data.status_message || "Failed to fetch skills"
+                    status_message: data.status_message || "Failed to Login"
+                };
+            }
+        } else {
+            return {
+                status: 404,
+                status_message: "BAD REQUEST"
+            };
+        }
+
+
+
+    } catch (error) {
+        if (error instanceof Error) {
+            if (error.name === 'AbortError') {
+                return {
+                    status: 408,
+                    status_message: "Request timeout"
+                };
+            }
+            return {
+                status: 500,
+                status_message: "Network error occurred"
+            };
+        }
+        return {
+            status: 500,
+            status_message: "Unknown error occurred"
+        };
+    }
+}
+
+export const SignUp = async (name: string, email: string, password?: string): Promise<ApiResponse> => {
+    try {
+        if (emailRegex.test(email)) {
+            const reqBody = {
+                "name": name,
+                "email": email,
+                "password": password,//bcrypt.hash(password, 8)
+                "role": 'USER'
+            }
+
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+            const res = await fetch(`${API_BASE_URL}/api/signup`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(reqBody),
+                signal: controller.signal
+            });
+
+            clearTimeout(timeoutId);
+
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+            const data = await res.json();
+            console.log("====res===", res);
+
+            if (data.status === 200) {
+                return {
+                    status: data.status || 200,
+                    status_message: data.status_message || "User signup Successfull. Please Login ✌🏻",
+                    // data: data.data
+                };
+            } else {
+                return {
+                    status: data.status || 400,
+                    status_message: data.status_message || "Something went wrong 😑"
                 };
             }
         } else {
