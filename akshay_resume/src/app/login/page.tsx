@@ -58,7 +58,10 @@ export default function Login() {
       <div className="auth-card">
         {/* Header section with title and subtitle */}
         <div className="auth-header">
-          <h1>🔐 Welcome Back</h1>
+          <Link href="/" className="inline-block mb-4 hover:scale-110 transition-transform">
+            <img src="/ots-logo.svg" alt="OTS" className="h-12 w-12 mx-auto" />
+          </Link>
+          <h1>Welcome Back</h1>
           <p>Sign in to your account</p>
         </div>
 

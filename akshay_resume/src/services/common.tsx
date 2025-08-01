@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://main.d1ho58lyaz1oo6.amplifyapp.com';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://ots-env.eba-jkmgypkt.us-east-1.elasticbeanstalk.com';
 
 interface ApiResponse {
     status: number;
@@ -158,7 +158,7 @@ export const SignUp = async (name: string, email: string, password?: string): Pr
                 "name": name,
                 "email": email,
                 "password": password,//bcrypt.hash(password, 8)
-                "role": 'USER'
+                "role": ''
             }
 
             const controller = new AbortController();
