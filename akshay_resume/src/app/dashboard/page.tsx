@@ -3,7 +3,6 @@
 import Contacts from '@/components/footer'
 import Profile from '../../components/profile'
 import Navbar from '@/components/navbar'
-import ItemList from '@/components/item-list'
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
