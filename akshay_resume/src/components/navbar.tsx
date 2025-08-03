@@ -6,7 +6,11 @@ import { useState } from 'react'
 import user from '../../Asstes/images/icons8-test-account-48.png'
 import { useRouter } from 'next/navigation';
 
-export default function Navbar() {
+type Props = {
+    name: string;
+};
+
+export default function Navbar({ name }: Props) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const [loading, setLoading] = useState(false); // Loading state for form submission
     const router = useRouter();
@@ -16,7 +20,7 @@ export default function Navbar() {
 
         try {
             sessionStorage.removeItem('authToken');
-            router.push('/login');
+            router.push('/');
         } catch (error) {
             alert('Logout failed. Please try again.')
         }
@@ -30,23 +34,28 @@ export default function Navbar() {
                 <span className="text-lg sm:text-xl font-bold text-gray-900">OTS</span>
             </div>
             <div className="hidden sm:flex sm:space-x-4">
-                <Link href="#">🏠 Home</Link>
+                <Link href="/home">🏠 Home</Link>
                 <Link href="#footer">📞 Contacts</Link>
                 <Link href="#card">💼 Projects</Link>
                 <Link href="/addProject">➕ Add Project</Link>
             </div>
-            <div className="sm:hidden flex space-x-2">
+            {/* <div className="sm:hidden flex space-x-2">
                 <Link href="#">🏠</Link>
                 <Link href="#footer">📞</Link>
                 <Link href="#card">💼</Link>
                 <Link href="/addProject">➕</Link>
-            </div>
-            <div className="profile-dropdown">
+            </div> */}
+            {/* <div className="profile-dropdown"> */}
+            <div className="flex items-center space-x-4">
+                <div className="text-sm text-gray-700">{name}</div>
+                <div className="h-8 w-8 bg-indigo-500 rounded-full flex items-center justify-center">
+                    <span className="text-white text-sm font-medium">{name.charAt(0)}</span>
+                </div>
                 <button
                     className="profile-button"
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 >
-                    <Image src={user} alt="Profile" height={20} width={20} className="sm:h-6 sm:w-6" />
+                    {/* <Image src={user} alt="Profile" height={20} width={20} className="sm:h-6 sm:w-6" /> */}
                     <span className="arrow text-xs sm:text-sm">▼</span>
                 </button>
                 {isDropdownOpen && (
@@ -57,6 +66,6 @@ export default function Navbar() {
                     </div>
                 )}
             </div>
-        </div>
+        </div >
     )
 }

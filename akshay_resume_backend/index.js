@@ -5,6 +5,8 @@ const env = require('dotenv').config();
 const authRouter = require('./routes/protectedRoutes')
 const publicRouter = require('./routes/publicRoutes')
 const cors = require('cors');
+const PORT = process.env.PORT || 8080;
+
 // const Server = http.createServer((req,res) => {
 //     res.writeHead(200,{"content-type":'application/json'})
 //     const respone= {
@@ -16,7 +18,7 @@ const cors = require('cors');
 // })
 // Server.listen(5000, ()=>{
 //     console.log("Server is running on port "+5000);
-    
+
 // })
 
 app.use(cors());
@@ -27,8 +29,8 @@ app.use(cors());
 }));
  */
 
-app.get('/', (req,res)=>{
-    res.send("Welcome to Portfolio");
+app.get('/', (req, res) => {
+  res.send("Welcome to Portfolio");
 })
 app.use((req, res, next) => {
   console.log(`${req.method} request for ${req.url}`);
@@ -44,9 +46,9 @@ app.use('/api/auth', authRouter);
 app.use('/api', publicRouter);
 
 
-app.listen(process.env.port, ()=>{
-    console.log("Application is running on port "+process.env.port);
-    
+app.listen(PORT, () => {
+  console.log("Application is running on port- " + PORT);
+
 })
 
 
