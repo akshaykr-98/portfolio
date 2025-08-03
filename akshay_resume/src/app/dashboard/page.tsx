@@ -11,13 +11,13 @@ export default function App() {
   useEffect(() => {
     const token = sessionStorage.getItem('authToken');
     if (!token) {
-      router.push('/login');
+      router.push('/');
     }
   });
 
   return (
     <section>
-      <Navbar />
+      <Navbar name="Akshay" />
       <Profile />
       <Contacts />
     </section>
